@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { createMuiTheme, responsiveFontSizes, MuiThemeProvider} from '@material-ui/core'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+/*Cores*/
+import { orange, deepOrange, blue, lightBlue } from '@material-ui/core/colors'
+import CssBaseLine from '@material-ui/core/CssBaseline'
+
+import Rotas from './rotas'
+
+export default function App(){
+  const temaDark = true;
+  const tipoPaleta = temaDark ? 'dark' : 'light';
+  const corPrimaria = temaDark ? orange[500]: blue[500];
+  const corSecundaria = temaDark ? deepOrange[900]: lightBlue[500]
+
+  let theme = createMuiTheme({
+    palette:{type: tipoPaleta,
+    primary:{main: corPrimaria},
+    secondary:{main: corSecundaria}
+    }
+  })
+
+  theme = responsiveFontSizes(theme)
+
+  return(
+    <MuiThemeProvider theme={theme}>
+      <CssBaseLine />
+      <Rotas />
+    </MuiThemeProvider>
+  )
 }
-
-export default App;
